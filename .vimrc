@@ -39,7 +39,7 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 
 "unite.vimを設定
 NeoBundle 'Shougo/unite.vim'
-NeoBundle 'git://github.com/Shougo/vimproc', {
+NeoBundle 'https://github.com/Shougo/vimproc', {
   \ 'build' : {
   \ 'windows' : 'tools\\update-dll-mingw',
   \ 'cygwin' : 'make -f make_cygwin.mak',
