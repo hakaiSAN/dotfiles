@@ -11,5 +11,5 @@ fi
 #arch linux用
 if [[ `uname -r` =~ ARCH$ ]]; then
      # echo "matched Arch Linux."
-     ln -sf ~/dotfiles/.xmonad ~/.xmonad
+     ln -sf ~/dotfiles/.xmonad/xmonad.hs ~/.xmonad/xmonad.hs
 fi
