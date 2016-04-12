@@ -1,0 +1,10 @@
+# Wi-Fi バッテリー残量　現在時刻
+ # 最右に表示
+ set-option -g status-right '#(get_ssid) #(battery -c tmux) [%Y-%m-%d(%a) %H:%M]'
+# vimクリップボードの共有
+ set-option -g default-command "reattach-to-user-namespace -l zsh"
+ # yank
+ set-option -g default-command "reattach-to-user-namespace -l $SHELL"
+ bind-key -t vi-copy Enter copy-pipe "reattach-to-user-namespace pbcopy"
+ bind-key -t vi-copy y copy-pipe "reattach-to-user-namespace pbcopy"
+ bind C-y run-shell "reattach-to-user-namespace pbpaste | tmux load-buffer - && tmux paste-buffer"
