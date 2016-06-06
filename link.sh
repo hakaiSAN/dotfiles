@@ -1,6 +1,6 @@
 ln -sf ~/dotfiles/.vimrc ~/.vimrc
 ln -sf ~/dotfiles/.zshrc ~/.zshrc
-ln -sf ~/dotfiles/.zshrc ~/.zsh_alias
+ln -sf ~/dotfiles/.zsh_alias ~/.zsh_alias
 ln -sf ~/dotfiles/.tmux.conf ~/.tmux.conf
 
 # Mac用
