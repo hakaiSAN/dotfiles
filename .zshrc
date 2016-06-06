@@ -82,6 +82,7 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 source ~/.zsh_alias
+source ~/.zsh_serve
 
 export TERM=xterm-256color
 
