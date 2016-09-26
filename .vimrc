@@ -92,6 +92,17 @@ NeoBundle 'Shougo/neomru.vim'
 "submode.vim
 NeoBundle 'kana/vim-submode'
 
+"補完強化
+NeoBundle 'Shougo/neosnippet.vim'
+NeoBundle 'Shougo/neocomplete.vim'
+NeoBundle 'AndrewRadev/splitjoin.vim'
+
+NeoBundle "thinca/vim-quickrun"
+NeoBundle "Shougo/vimproc"
+NeoBundle "osyo-manga/shabadou.vim"
+NeoBundle "osyo-manga/vim-watchdogs"
+
+
 call neobundle#end()
 
 " Required:
@@ -330,6 +341,19 @@ call submode#map('bufmove', 'n', '', '>', '<C-w>>')
 call submode#map('bufmove', 'n', '', '<', '<C-w><')
 call submode#map('bufmove', 'n', '', '+', '<C-w>+')
 call submode#map('bufmove', 'n', '', '-', '<C-w>-')
+
+
+"補完強化系
+if !exists("g:quickrun_config")
+  let g:quickrun_config = {}
+endif
+let g:quickrun_config["watchdogs_checker/_"] = {
+  \ "outputter/quickfix/open_cmd" : "",
+  \ }
+
+
+
+
 
 "colorscheme
 let g:hybrid_use_iTerm_colors = 1
