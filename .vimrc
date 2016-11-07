@@ -94,14 +94,20 @@ NeoBundle 'kana/vim-submode'
 
 "補完強化
 NeoBundle 'Shougo/neosnippet.vim'
+NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'AndrewRadev/splitjoin.vim'
 
 NeoBundle "thinca/vim-quickrun"
-NeoBundle "Shougo/vimproc"
 NeoBundle "osyo-manga/shabadou.vim"
 NeoBundle "osyo-manga/vim-watchdogs"
 
+" scala用syntax highlight
+NeoBundle 'derekwyatt/vim-scala'
+
+"for php
+NeoBundle 'thinca/vim-ref', {'functions': 'ref#K'}
+NeoBundle 'violetyk/neocomplete-php.vim'
 
 call neobundle#end()
 
@@ -342,6 +348,10 @@ call submode#map('bufmove', 'n', '', '<', '<C-w><')
 call submode#map('bufmove', 'n', '', '+', '<C-w>+')
 call submode#map('bufmove', 'n', '', '-', '<C-w>-')
 
+"Scala vim
+au BufRead,BufNewFile *.scala  set filetype=scala
+
+
 
 "補完強化系
 if !exists("g:quickrun_config")
@@ -352,7 +362,113 @@ let g:quickrun_config["watchdogs_checker/_"] = {
   \ }
 
 
+"for php
+let g:php_baselib       = 1
+let g:php_htmlInStrings = 1
+let g:php_noShortTags   = 1
+let g:php_sql_query     = 1
 
+" 補完
+" Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+ 
+" Define dictionary.
+let g:neocomplete#sources#dictionary#dictionaries = {
+			\ 'default' : '',
+			\ 'vimshell' : $HOME.'/.vimshell_hist',
+			\ 'scheme' : $HOME.'/.gosh_completions'
+			\ }
+ 
+" Define keyword.
+if !exists('g:neocomplete#keyword_patterns')
+	let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+ 
+" Plugin key-mappings.
+inoremap <expr><C-g>     neocomplete#undo_completion()
+inoremap <expr><C-l>     neocomplete#complete_common_string()
+ 
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+	return neocomplete#close_popup() . "\<CR>"
+	" For no inserting <CR> key.
+	"return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+endfunction
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y>  neocomplete#close_popup()
+inoremap <expr><C-e>  neocomplete#cancel_popup()
+" Close popup by <Space>.
+"inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
+ 
+" Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+" let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+
+let g:neocomplete_php_locale = 'ja'
+
+" MySQLの場合"
+let g:sql_type_default = 'mysql' 
+
+" vim-ref {{{
+let g:ref_no_default_key_mappings = 1
+inoremap <silent><C-k> <C-o>:call<Space>ref#K('normal')<CR><ESC>
+nnoremap <silent>K     :<C-u>call<Space>ref#K('normal')<CR>
+let g:ref_cache_dir      = $HOME .'/.vim/vim-ref/cache'
+let g:ref_phpmanual_path = $HOME .'/.vim/vim-ref/php-chunked-xhtml'
+"}}}
+" lynxの設定が必要(テキストブラウザ）
+
+" vim-quickrun {{{
+nnoremap <Leader>run :<C-u>QuickRun<CR>
+let g:quickrun_config = {
+\    '_': {
+\        'hook/close_buffer/enable_empty_data': 1,
+\        'hook/close_buffer/enable_failure':    1,
+\        'outputter':                           'multi:buffer:quickfix',
+\        'outputter/buffer/close_on_empty':     1,
+\        'outputter/buffer/split':              ':botright',
+\        'runner':                              'vimproc',
+\        'runner/vimproc/updatetime':           600},
+\    'watchdogs_checker/_': {
+\        'hook/close_quickfix/enable_exit':        1,
+\        'hook/back_window/enable_exit':           0,
+\        'hook/back_window/priority_exit':         1,
+\        'hook/qfstatusline_update/enable_exit':   1,
+\        'hook/qfstatusline_update/priority_exit': 2,
+\        'outputter/quickfix/open_cmd':            ''},
+\    'watchdogs_checker/php': {
+\        'command': 'php',
+\        'cmdopt':  '-l -d error_reporting=E_ALL -d display_errors=1 -d display_startup_errors=1 -d log_errors=0 -d xdebug.cli_color=0',
+\        'exec':    '%c %o %s:p',
+\        'errorformat': '%m\ in\ %f\ on\ line\ %l'},}
+"}}}
+
+" vim-watchdogs {{{
+let s:hooks = neobundle#get_hooks('vim-watchdogs')
+function! s:hooks.on_source(bundle) abort "{{{
+    "vim-watchdogs
+    let g:watchdogs_check_BufWritePost_enable  = 1
+    let g:watchdogs_check_CursorHold_enable    = 1
+endfunction "}}}
 
 
 "colorscheme
