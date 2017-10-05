@@ -50,7 +50,6 @@ NeoBundle 'https://github.com/Shougo/vimproc', {
   \}
 
 
-
 "autoclose 
 NeoBundle 'Townk/vim-autoclose'
 
@@ -108,6 +107,9 @@ NeoBundle 'derekwyatt/vim-scala'
 "for php
 NeoBundle 'thinca/vim-ref', {'functions': 'ref#K'}
 NeoBundle 'violetyk/neocomplete-php.vim'
+
+"syntax check
+NeoBundle 'scrooloose/syntastic'
 
 call neobundle#end()
 
@@ -480,3 +482,15 @@ hi LineNr ctermbg=234 ctermfg=234
 hi CursorLineNr ctermbg=2 ctermfg=0
 set cursorline
 hi clear CursorLine
+
+let OSTYPE = system('uname')
+if OSTYPE == "Darwin\n"
+  ""ここにMac向けの設定
+  let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
+  execute "set rtp+=" . g:opamshare . "/merlin/vim" 
+  let g:syntastic_ocaml_checkers = ['merlin']
+  execute 'set rtp^=' . g:opamshare . '/ocp-indent/vim'
+elseif OSTYPE == "Linux\n"
+  ""ここにLinux向けの設定
+endif
+
