@@ -55,7 +55,7 @@ if dein#load_state('~/.cache/dein')
   " call dein#add('Shougo/neosnippet-snippets')
   
   " You can specify revision/branch/tag.
-  call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
+  " call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
   
   " 管理するプラグインを記述したファイル
   let s:toml = '~/.dein.toml'
@@ -438,6 +438,7 @@ let g:quickrun_config = {
 "colorscheme
 let g:hybrid_use_iTerm_colors = 1
 syntax on
+set background=dark
 colorscheme hybrid
 hi LineNr ctermbg=234 ctermfg=234
 hi CursorLineNr ctermbg=2 ctermfg=0

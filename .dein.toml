@@ -1,4 +1,7 @@
 [[plugins]]
+repo = 'Shougo/vimshell'
+
+[[plugins]]
 repo = 'Shougo/neosnippet-snippets'
 
 [[plugins]]
