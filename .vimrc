@@ -1,5 +1,5 @@
 " Configuration file for vim
-
+  
 " Normally we use vim-extensions. If you want true vi-compatibility
 " remove change the following statements
 set nocompatible	" Use Vim defaults instead of 100% vi compatibility
@@ -23,106 +23,63 @@ set history=50
 set laststatus=2
 filetype on
 
-"--------------------------
-" Start Neobundle Settings.
-"---------------------------
-" bundleで管理するディレクトリを指定
-set runtimepath+=~/.vim/bundle/neobundle.vim/
+if &compatible
+  set nocompatible               " Be iMproved
+endif
+
+" dein.vimのディレクトリ
+let s:dein_dir = expand('~/.cache/dein')
+let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 
 " Required:
-call neobundle#begin(expand('~/.vim/bundle/'))
+ set  runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
 
-" neobundle自体をneobundleで管理
-NeoBundleFetch 'Shougo/neobundle.vim'
+ " Required:
+if dein#load_state('~/.cache/dein')
+   call dein#begin('~/.cache/dein')
 
-" 今後このあたりに追加のプラグインをどんどん書いて行きます！！"
+  " Let dein manage dein
+  " Required:
+  call dein#add('~/.cache/dein/repos/github.com/Shougo/dein.vim')
+  
+  " Add or remove your plugins here:
+  " call dein#add('Shougo/neosnippet.vim')
+  " call dein#add('Shougo/neosnippet-snippets')
+  
+  " You can specify revision/branch/tag.
+  call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
+  
+  " 管理するプラグインを記述したファイル
+  let s:toml = '~/.dein.toml'
+  let s:lazy_toml = '~/.dein_lazy.toml'
+  call dein#load_toml(s:toml, {'lazy': 0})
+  call dein#load_toml(s:lazy_toml, {'lazy': 1})
+  call dein#end()
+  call dein#save_state()
+endif
+" プラグインの追加・削除やtomlファイルの設定を変更した後は
+" 適宜 call dein#update や call dein#clear_state を呼んでください。
+" そもそもキャッシュしなくて良いならload_state/save_stateを呼ばないようにしてください。
 
-"unite.vimを設定
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'https://github.com/Shougo/vimproc', {
-  \ 'build' : {
-  \ 'windows' : 'tools\\update-dll-mingw',
-  \ 'cygwin' : 'make -f make_cygwin.mak',
-  \ 'mac' : 'make',
-  \ 'linux' : 'make',
-  \ 'unix' : 'gmake',
-  \ },
-  \}
+" 2016.04.16 追記
+" load_cache -> load_state
+" save_cache -> save_state
+" となり書き方が少し変わりました。
+" 追記終わり
 
+if has('vim_starting') && dein#check_install()
+  call dein#install()
+endif
 
-"autoclose 
-NeoBundle 'Townk/vim-autoclose'
-
-"NERDTree
-NeoBundle 'scrooloose/nerdtree'
-
-"grep.vim
-NeoBundle 'grep.vim'
-
-"indent color
-NeoBundle 'nathanaelkane/vim-indent-guides'
-
-"vimshell
-NeoBundleLazy 'Shougo/vimshell', {
-  \ 'depends' : 'Shougo/vimproc',
-  \ 'autoload' : {
-  \   'commands' : [{ 'name' : 'VimShell', 'complete' : 'customlist,vimshell#complete'},
-  \                 'VimShellExecute', 'VimShellInteractive',
-  \                 'VimShellTerminal', 'VimShellPop'],
-  \   'mappings' : ['<Plug>(vimshell_switch)']
-  \ }}
-
-"yank履歴を保存
-NeoBundle 'LeafCage/yankround.vim'
-
-"lightline-vim
-NeoBundle 'itchyny/lightline.vim'
-
-"git
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'airblade/vim-gitgutter'
-
-"colorscheme
-NeoBundle 'w0ng/vim-hybrid'
-
-"file_mru
-NeoBundle 'Shougo/neomru.vim'
-
-"submode.vim
-NeoBundle 'kana/vim-submode'
-
-"補完強化
-NeoBundle 'Shougo/neosnippet.vim'
-NeoBundle 'Shougo/neosnippet-snippets'
-NeoBundle 'Shougo/neocomplete.vim'
-NeoBundle 'AndrewRadev/splitjoin.vim'
-
-NeoBundle "thinca/vim-quickrun"
-NeoBundle "osyo-manga/shabadou.vim"
-NeoBundle "osyo-manga/vim-watchdogs"
-
-" scala用syntax highlight
-NeoBundle 'derekwyatt/vim-scala'
-
-"for php
-NeoBundle 'thinca/vim-ref', {'functions': 'ref#K'}
-NeoBundle 'violetyk/neocomplete-php.vim'
-
-"syntax check
-NeoBundle 'scrooloose/syntastic'
-
-call neobundle#end()
 
 " Required:
 filetype plugin indent on
+syntax enable
 
-" 未インストールのプラグインがある場合、インストールするかどうかを尋ねてくれるようにする設定
-" 毎回聞かれると邪魔な場合もあるので、この設定は任意です。
-NeoBundleCheck
-
-"-------------------------
-" End Neobundle Settings.
-"-------------------------
+" If you want to install not installed plugins on startup.
+"if dein#check_install()
+"  call dein#install()
+"endif
 
 " Uniteを開く時、垂直分割で開く
 " let g:unite_enable_split_vertically = 1
@@ -134,34 +91,34 @@ let g:unite_source_file_mru_limit = 200
 nnoremap <silent> ,ub :<C-u>Unite buffer<CR>
 nnoremap <silent> ,ur :<C-u>Unite -buffer-name=register register<CR>
 nnoremap <silent> ,uu :<C-u>Unite file_mru buffer<CR>
-
+"
 " ファイルを開く時に、ウィンドウを分割して開く（split:水平　vsplit:垂直）
 au FileType unite nnoremap <silent> <buffer> <expr> <C-j> unite#do_action('split')
 au FileType unite inoremap <silent> <buffer> <expr> <C-j> unite#do_action('split')
 au FileType unite nnoremap <silent> <buffer> <expr> <C-l> unite#do_action('vsplit')
 au FileType unite inoremap <silent> <buffer> <expr> <C-l> unite#do_action('vsplit')
-
+"
 "insert modeで開始
 " let g:unite_enable_start_insert = 1
-
+"
 "ag(the_silver_searcher)使用のための設定
-
+"
 "大文字小文字を区別しない
 let g:unite_enable_ignore_case = 1
-let g:unite_enable_smart_case = 1
-
+"let g:unite_enable_smart_case = 1
+"
 "grep検索
 nnoremap <silent> ,g :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
-
+"
 "カーソル位置の単語をgrep検索
 nnoremap <silent> ,cg :<C-u>Unite grep:. -buffer-name=search-buffer<CR><C-R><C-W>
-
+"
 " ディレクトリを指定してgrep検索
 nnoremap <silent> ,dg  :<C-u>Unite grep -buffer-name=search-buffer<CR>
 
 "grep検索結果の再呼出
-nnoremap <silent> ,r :<C-u>UniteResume search-buffer<CR>
-
+noremap <silent> ,r :<C-u>UniteResume search-buffer<CR>
+"
 "unite grepにag(The silver searcher)を使う
 if executable('ag')
   let g:unite_source_grep_command = 'ag'
@@ -340,7 +297,10 @@ autocmd FileType go autocmd BufWritePre <buffer> Fmt
 exe "set rtp+=".globpath($GOPATH, "src/github.com/nsf/gocode/vim")
 set completeopt=menu,preview
 
-"submode.vim 
+" vim-submode  "{{{
+if dein#tap('vim-submode')
+" http://thinca.hatenablog.com/entry/20130131/1359567419
+" window sizeを連続で変更する
 call submode#enter_with('bufmove', 'n', '', 's>', '<C-w>>')
 call submode#enter_with('bufmove', 'n', '', 's<', '<C-w><')
 call submode#enter_with('bufmove', 'n', '', 's+', '<C-w>+')
@@ -349,11 +309,14 @@ call submode#map('bufmove', 'n', '', '>', '<C-w>>')
 call submode#map('bufmove', 'n', '', '<', '<C-w><')
 call submode#map('bufmove', 'n', '', '+', '<C-w>+')
 call submode#map('bufmove', 'n', '', '-', '<C-w>-')
+endif
+" }}}"
+
+
+"submode.vim 
 
 "Scala vim
 au BufRead,BufNewFile *.scala  set filetype=scala
-
-
 
 "補完強化系
 if !exists("g:quickrun_config")
@@ -415,7 +378,7 @@ inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><C-y>  neocomplete#close_popup()
 inoremap <expr><C-e>  neocomplete#cancel_popup()
 " Close popup by <Space>.
-"inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
+inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
  
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -464,20 +427,10 @@ let g:quickrun_config = {
 \        'errorformat': '%m\ in\ %f\ on\ line\ %l'},}
 "}}}
 
-" vim-watchdogs {{{
-let s:hooks = neobundle#get_hooks('vim-watchdogs')
-function! s:hooks.on_source(bundle) abort "{{{
-    "vim-watchdogs
-    let g:watchdogs_check_BufWritePost_enable  = 1
-    let g:watchdogs_check_CursorHold_enable    = 1
-endfunction "}}}
-
-
 "colorscheme
 let g:hybrid_use_iTerm_colors = 1
-set background=dark
-colorscheme hybrid
 syntax on
+colorscheme hybrid
 hi LineNr ctermbg=234 ctermfg=234
 hi CursorLineNr ctermbg=2 ctermfg=0
 set cursorline
