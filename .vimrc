@@ -4,7 +4,6 @@
 " remove change the following statements
 set nocompatible	" Use Vim defaults instead of 100% vi compatibility
 set backspace=2		" more powerful backspacing
-
 " Don't write backup file if vim is being called by "crontab -e"
 au BufWrite /private/tmp/crontab.* set nowritebackup nobackup
 " Don't write backup file if vim is being called by "chpass"
@@ -364,7 +363,7 @@ inoremap <expr><C-l>     neocomplete#complete_common_string()
  
 " Recommended key-mappings.
 " <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+"inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function()
 	return neocomplete#close_popup() . "\<CR>"
 	" For no inserting <CR> key.
@@ -427,14 +426,6 @@ let g:quickrun_config = {
 \        'errorformat': '%m\ in\ %f\ on\ line\ %l'},}
 "}}}
 
-"colorscheme
-let g:hybrid_use_iTerm_colors = 1
-syntax on
-colorscheme hybrid
-hi LineNr ctermbg=234 ctermfg=234
-hi CursorLineNr ctermbg=2 ctermfg=0
-set cursorline
-hi clear CursorLine
 
 let OSTYPE = system('uname')
 if OSTYPE == "Darwin\n"
@@ -443,7 +434,20 @@ if OSTYPE == "Darwin\n"
   execute "set rtp+=" . g:opamshare . "/merlin/vim" 
   let g:syntastic_ocaml_checkers = ['merlin']
   execute 'set rtp^=' . g:opamshare . '/ocp-indent/vim'
+" let g:hybrid_use_iTerm_colors = 1
 elseif OSTYPE == "Linux\n"
   ""ここにLinux向けの設定
+  let g:hybrid_use_Xresources = 1
+  let g:hybrid_custom_term_colors = 1
+  hi Normal ctermbg=2 ctermfg=255
+  "let g:hybrid_reduced_contrast = 1
 endif
+
+"colorscheme
+syntax on
+colorscheme hybrid
+hi LineNr ctermbg=234 ctermfg=234
+hi CursorLineNr ctermbg=2 ctermfg=0
+set cursorline
+hi clear CursorLine
 
