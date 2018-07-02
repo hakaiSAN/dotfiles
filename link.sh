@@ -17,3 +17,10 @@ if [[ `uname -r` =~ ARCH$ ]]; then
      # echo "matched Arch Linux."
      ln -sf ~/dotfiles/.xmonad/xmonad.hs ~/.xmonad/xmonad.hs
 fi
+
+#install dein.vim
+
+
+mkdir -p ~/.cache/dein
+curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > ~/.cache/dein_installer.sh
+sh ~/.cache/dein_installer.sh ~/.cache/dein
