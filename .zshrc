@@ -8,6 +8,8 @@ darwin*)
     ;;
 esac
 source $ZPLUG_HOME/init.zsh
+
+
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 zplug "yous/vanilli.sh"
 # theme
@@ -23,6 +25,11 @@ zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-completions"
 zplug "chrissicool/zsh-256color"
 # enhancd
+#zplug "junegunn/fzf-bin", \
+#    as:command, \
+#    file:"fzf", \
+#    from:gh-r, \
+#    | zplug "b4b4r07/enhancd", of:enhancd.sh
 zplug "b4b4r07/enhancd", use:init.sh
 # git plugin
 zplug "plugins/git", from:oh-my-zsh
@@ -36,11 +43,11 @@ zplug "plugins/git", from:oh-my-zsh
   # Then, source plugins and add commands to $PATH
   zplug load
 
-  source ~/.zsh_alias
-  source ~/.zsh_serve
-  export CLICOLOR=1
-  export ENHANCD_COMMAND=ed
-  export ENHANCD_FILTER=ENHANCD_FILTER=fzy:fzf:peco
+source ~/.zsh_alias
+source ~/.zsh_serve
+export CLICOLOR=1
+export ENHANCD_COMMAND=ed
+export ENHANCD_FILTER=fzy:fzf:peco
 
-  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-  [ -f ~/.zsh_fzf ] && source ~/.zsh_fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f ~/.zsh_fzf ] && source ~/.zsh_fzf

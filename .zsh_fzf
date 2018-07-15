@@ -34,8 +34,6 @@ fshow() {
                                                       FZF-EOF"
 }
 
-
-
 #fcd -cd to selected directory
 fcd() {
     local dir
