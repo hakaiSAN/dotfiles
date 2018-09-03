@@ -1,10 +1,6 @@
 [[plugins]]
 repo = 'Shougo/neosnippet-snippets'
-
-[[plugins]]
-repo = 'Shougo/neomru.vim'
-on_path = '.*'
-
+[[plugins]] repo = 'Shougo/neomru.vim' on_path = '.*' 
 [[plugins]]
 repo = 'jiangmiao/auto-pairs'
 on_i = 1
@@ -118,6 +114,10 @@ repo = 'derekwyatt/vim-scala'
 repo = 'thinca/vim-ref'
 [[plugins]]
 repo = 'violetyk/neocomplete-php.vim'
+
+# for system verilog
+[[plugins]]
+repo = 'nachumk/systemverilog.vim'
 
 # syntax check
 [[plugins]]
