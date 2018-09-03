@@ -434,7 +434,7 @@ if OSTYPE == "Darwin\n"
   execute "set rtp+=" . g:opamshare . "/merlin/vim" 
   let g:syntastic_ocaml_checkers = ['merlin']
   execute 'set rtp^=' . g:opamshare . '/ocp-indent/vim'
-" let g:hybrid_use_iTerm_colors = 1
+ let g:hybrid_use_iTerm_colors = 1
 elseif OSTYPE == "Linux\n"
   ""ここにLinux向けの設定
   let g:hybrid_use_Xresources = 1
@@ -451,3 +451,5 @@ hi CursorLineNr ctermbg=2 ctermfg=0
 set cursorline
 hi clear CursorLine
 
+" Vim Spell Check
+set spelllang=en,cjk
