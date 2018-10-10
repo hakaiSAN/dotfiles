@@ -49,6 +49,7 @@ export ENHANCD_FILTER=ENHANCD_FILTER=fzy:fzf:peco
 source ~/.zsh_alias
 source ~/.zsh_serve
 export CLICOLOR=1
+alias ls="ls --color=auto"
 export ENHANCD_COMMAND=ed
 export ENHANCD_FILTER=fzy:fzf:peco
 
