@@ -1,0 +1,21 @@
+#tmux version < 2.4
+#Use vi style key bindings in copy mode
+set-window-option -g mode-keys vi
+#Prefix+y でコピーモード開始
+bind-key y copy-mode
+#pでバッファをペースト
+bind-key p paste-buffer
+bind-key -t vi-copy v begin-selection
+bind-key -t vi-copy V select-line
+#Ctrl-Vで矩形モードに切り替え
+bind-key -t vi-copy C-v rectangle-toggle
+#y or Enterでヤンクしてクリップボードにコピー
+bind-key -t vi-copy y copy-pipe "xsel -bi"
+bind-key -t vi-copy Enter copy-pipe "xsel -bi"
+#ESCでコピーモードを抜ける
+bind-key -t vi-copy Escape cancel
+#Hで行頭
+bind-key -t vi-copy H start-of-line
+#Lで行末
+bind-key -t vi-copy L end-of-line
+bind C-y run-shell "xsel -bo | tmux load-buffer - && tmux paste-buffer"

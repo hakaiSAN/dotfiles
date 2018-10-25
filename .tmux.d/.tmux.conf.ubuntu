@@ -1,6 +1,5 @@
-# vでマーク開始
-bind -t vi-copy v begin-selection
-# Yで行をヤンク
-bind -t vi-copy Y copy-line
-bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "xclip -i -sel clip > /dev/null"
-bind-key -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "xclip -i -sel clip > /dev/null"
+#Ref : https://www.g104robo.com/entry/tmux-tutorial#%E3%82%B3%E3%83%94%E3%83%BC%E3%81%AB%E9%96%A2%E3%81%99%E3%82%8B%E8%A8%AD%E5%AE%9A
+#tmux version < 2.4
+if-shell 'test $(echo "$(tmux -V | awk \{print\ \$2\}) < 2.4" | bc) -ne 0' \
+  'source-file ~/dotfiles/.tmux.d/.tmux.conf.ubuntu.2.4' \
+  'source-file ~/dotfiles/.tmux.d/.tmux.conf.ubuntu.2.5'
