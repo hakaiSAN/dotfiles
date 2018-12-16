@@ -32,3 +32,15 @@ sh ~/.cache/dein_installer.sh ~/.cache/dein
 
 #install zplug
 curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh| zsh
+
+if [[ `cat /etc/lsb-release` =~ "Ubuntu" ]]; then
+  sudo apt-get install xsel
+fi
+if [[ `cat /etc/redhat-release` =~ "CentOS" ]]; then
+  sudo yum install zsh tmux vim xsel
+  cd ~/.cache/dein/repos/github.com/Shougo/dein.vim 
+  git checkout 1.5
+fi
+
+
+
