@@ -37,7 +37,8 @@ if [[ `cat /etc/lsb-release` =~ "Ubuntu" ]]; then
   sudo apt-get install xsel
 fi
 if [[ `cat /etc/redhat-release` =~ "CentOS" ]]; then
-  sudo yum install zsh tmux vim xsel
+  sudo yum install git zsh tmux vim xsel
+  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf 
   cd ~/.cache/dein/repos/github.com/Shougo/dein.vim 
   git checkout 1.5
 fi
