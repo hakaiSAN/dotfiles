@@ -29,3 +29,20 @@ fi
 mkdir -p ~/.cache/dein
 curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > ~/.cache/dein_installer.sh
 sh ~/.cache/dein_installer.sh ~/.cache/dein
+
+#install zplug
+curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh| zsh
+
+if [[ `cat /etc/lsb-release` =~ "Ubuntu" ]]; then
+  sudo apt-get install xsel
+fi
+if [[ `cat /etc/redhat-release` =~ "CentOS" ]]; then
+  sudo yum install git zsh tmux vim xsel
+  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf 
+  ~/.fzf/install
+  cd ~/.cache/dein/repos/github.com/Shougo/dein.vim 
+  git checkout 1.5
+fi
+
+
+

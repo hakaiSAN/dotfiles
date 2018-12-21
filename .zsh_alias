@@ -128,3 +128,7 @@ function v-gcc(){
 #function gtags(){
 #  /usr/local/bin/gtags
 #}
+#
+function ctrl-caps-change(){
+  gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:swapcaps']"
+}
