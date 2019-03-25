@@ -1,6 +1,7 @@
 [[plugins]]
 repo = 'Shougo/neosnippet-snippets'
-[[plugins]] repo = 'Shougo/neomru.vim' on_path = '.*' 
+[[plugins]]
+repo = 'Shougo/neomru.vim' on_path = '.*' 
 [[plugins]]
 repo = 'jiangmiao/auto-pairs'
 on_i = 1
@@ -8,23 +9,13 @@ on_i = 1
 [[plugins]]
 repo = 'Shougo/neoyank.vim'
 on_path = '.*'
-on_i = 1
-
+on_i = 1 
 [[plugins]]
 repo = 'Shougo/neosnippet'
 depends = ['neosnippet-snippets']
 on_i = 1
 on_ft = ['snippet']
 
-[[plugins]]
-repo = 'Shougo/neocomplete'
-if = 'has("lua")'
-on_i = 1
-
-[[plugins]]
-repo = 'Shougo/deoplete.nvim'
-if = 'has("nvim")'
-on_i = 1
 
 [[plugins]]
 repo = 'Shougo/unite.vim'
@@ -112,8 +103,8 @@ repo = 'derekwyatt/vim-scala'
 # for php
 [[plugins]]
 repo = 'thinca/vim-ref'
-[[plugins]]
-repo = 'violetyk/neocomplete-php.vim'
+#[[plugins]]
+#repo = 'violetyk/neocomplete-php.vim'
 
 # for system verilog
 [[plugins]]
@@ -149,6 +140,16 @@ hook_post_source = '''
 [[plugins]]
 repo    = 'int3h/vim-opencl'
 
-
-
-
+#auto-complete
+#[[plugins]]
+#repo = 'Shougo/deoplete.nvim'
+#hook_add = '''
+#  let g:deoplete#enable_at_startup=1
+# '''
+#on_i = 1
+[[plugins]]
+repo = 'davidhalter/jedi-vim'
+on_ft = [ 'python' ]
+hook_add = '''
+  let g:jedi#force_py_version = 3.6
+'''

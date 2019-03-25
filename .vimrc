@@ -383,7 +383,7 @@ inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+" autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 " let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
@@ -453,3 +453,10 @@ hi clear CursorLine
 
 " Vim Spell Check
 set spelllang=en,cjk
+
+" For jedi-vim
+autocmd FileType python setlocal completeopt-=preview
+inoremap <expr> <C-j> pumvisible() ? "\<Down>" : "\<C-x>\<C-o>"
+inoremap <expr> <C-k> pumvisible() ? "\<Up>" : "\<C-x>\<C-o>"
+inoremap <expr> <C-l> pumvisible() ? "\<Right>" : "\<C-x>\<C-o>"
+inoremap <expr> <C-h> pumvisible() ? "\<Left>" : "\<C-x>\<C-o>"
