@@ -460,3 +460,5 @@ inoremap <expr> <C-j> pumvisible() ? "\<Down>" : "\<C-x>\<C-o>"
 inoremap <expr> <C-k> pumvisible() ? "\<Up>" : "\<C-x>\<C-o>"
 inoremap <expr> <C-l> pumvisible() ? "\<Right>" : "\<C-x>\<C-o>"
 inoremap <expr> <C-h> pumvisible() ? "\<Left>" : "\<C-x>\<C-o>"
+inoremap <expr> <C-q> pumvisible() ? "\<C-e>" : ""
+
