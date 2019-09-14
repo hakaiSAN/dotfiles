@@ -1,10 +1,11 @@
 # Created by newuser for 5.0.2
 case ${OSTYPE} in
-darwin*)
-  export ZPLUG_HOME=/usr/local/opt/zplug
+  darwin*)
+  export ZPLUG_HOME=~/.zplug
     ;;
   linux*)
     export ZPLUG_HOME=~/.zplug
+    alias ls="ls --color=auto"
     ;;
 esac
 source $ZPLUG_HOME/init.zsh
@@ -49,7 +50,6 @@ export ENHANCD_FILTER=ENHANCD_FILTER=fzy:fzf:peco
 source ~/.zsh_alias
 source ~/.zsh_serve
 export CLICOLOR=1
-#alias ls="ls --color=auto"
 export ENHANCD_COMMAND=ed
 export ENHANCD_FILTER=fzy:fzf:peco
 
