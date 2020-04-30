@@ -34,7 +34,7 @@ sh ~/.cache/dein_installer.sh ~/.cache/dein
 curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh| zsh
 
 if [[ `cat /etc/lsb-release` =~ "Ubuntu" ]]; then
-  sudo apt-get install xsel
+  sudo apt-get install xsel git zsh vim tmux
 fi
 if [[ `cat /etc/redhat-release` =~ "CentOS" ]]; then
   sudo yum install git zsh tmux vim xsel
