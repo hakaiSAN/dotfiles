@@ -32,6 +32,7 @@ sh ~/.cache/dein_installer.sh ~/.cache/dein
 
 #install zplug
 curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh| zsh
+touch ~/.zsh_serve
 
 if [[ `cat /etc/lsb-release` =~ "Ubuntu" ]]; then
   sudo apt-get install xsel git zsh vim tmux
