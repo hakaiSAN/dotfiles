@@ -1,10 +1,17 @@
 # Created by newuser for 5.0.2
 case ${OSTYPE} in
-darwin*)
-  export ZPLUG_HOME=/usr/local/opt/zplug
-    ;;
+  darwin*)
+  #TODO Status Tracking(Currrently, 20.0 is beta and need to build from source code)
+  verflag=`echo "$(echo ${OSTYPE} | sed -e s/'[^0-9,.]'//g) >= 20.0" | bc`
+  if [ $verflag -eq 1 ]; then
+    export ZPLUG_HOME=~/.zplug
+  else
+    export ZPLUG_HOME=/usr/local/opt/zplug
+  fi
+  ;;
   linux*)
     export ZPLUG_HOME=~/.zplug
+    alias ls="ls --color=auto"
     ;;
 esac
 source $ZPLUG_HOME/init.zsh
@@ -49,7 +56,6 @@ export ENHANCD_FILTER=ENHANCD_FILTER=fzy:fzf:peco
 source ~/.zsh_alias
 source ~/.zsh_serve
 export CLICOLOR=1
-alias ls="ls --color=auto"
 export ENHANCD_COMMAND=ed
 export ENHANCD_FILTER=fzy:fzf:peco
 

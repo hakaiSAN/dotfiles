@@ -1,0 +1,94 @@
+#Basic Setting(Current:>v2.4)
+ # Prefix
+ set-option -g prefix C-t
+ # デフォルトのPrefix(C-b)を解除
+ unbind C-b
+ # mode-keys
+ set-window-option -g mode-keys vi
+ # terminal
+ set-option -g default-terminal screen-256color
+ set -g terminal-overrides 'xterm:colors=256' 
+ # historyの上限をデフォルトの2000から10000に
+ set-option -g history-limit 10000
+ # ステータスバーをトップに表示
+ set-option -g status-position top
+ # 左右のステータスバーの長さを決定する
+ set-option -g status-left-length 90
+ set-option -g status-right-length 90
+ # #H => マシン名
+ # #P => ペイン番号
+ # 最左に表示
+ set-option -g status-left '#H:[#P]'
+ # Wi-Fi バッテリー残量　現在時刻
+ # 最右に表示
+ set-option -g status-right '#(get_ssid) #(battery -c tmux) [%Y-%m-%d(%a) %H:%M]'
+ # View
+ # ステータスライン更新間隔(秒)
+ set -g status-interval 5
+ set -g status-left-length 100
+ set -g status-right-length 50
+ set-option -g set-titles on
+ # www1.hoge.com→www1のみ表示。
+ set-option -g set-titles-string "@#(hostname | sed 's/\\\\..*//')"
+ # ステータスラインカスタム関連
+ set  -g status-style bg=colour241,fg=colour229,dim
+ # 左部:whoami@hostname
+ # set -g status-left '#[fg=green,bold][#20(whoami)@#H]#[default]'
+ # 右部:[2011/03/06(Sun)20:21]
+ # set -g status-right '#[fg=green,bold][%Y/%m/%d(%a)%H:%M]#[default]'
+ set  -g message-style fg=white,bg=red,bold
+ set  -g pane-active-border-style fg=white,bg=black
+ #set-option -g pane-border-format "#[fg=black,bg=blue] #P #[default]#(tmux-pane-border #{pane_current_command} #{pane_pid} #{pane_current_path})"
+ setw -g window-status-format "#[default]#(ssh-pane #{pane_current_command} #{pane_pid} #{pane_current_path})"
+ setw -g window-status-current-format "#[default]#(ssh-pane #{pane_current_command} #{pane_pid} #{pane_current_path})"
+ setw -g mode-style bg=white,fg=black
+ #setw -g window-status-style bg=black,fg=white
+ #setw -g window-status-style bg=green,fg=black,bold
+ # Option
+ # utf8有効
+if-shell "[[ `tmux -V` == *1.* ]] || [[ `tmux -V` == *2.1* ]]" \
+  'set-window-option -g utf8 on'
+ # ウィンドウ等の番号基準値
+ set-option -g base-index 1
+ # vimクリップボードの共有
+ #set-option -g default-command "reattach-to-user-namespace -l zsh"
+ # KeyBindings
+ # 設定リロード
+ bind r source-file ~/.tmux.conf
+ # ウィンドウ移動
+ bind t last-window
+ bind -r C-n next-window
+ bind -r C-p previous-window
+ # ウィンドウ選択画面
+ bind Space choose-window
+ # 新ウィンドウ作成
+ bind c new-window -c "#{pane_current_path}"
+ bind C-c new-window -c "#{pane_current_path}"
+ # Toggle pane and window
+ bind C-t run "tmux last-pane || tmux last-window || tmux new-window"
+ # 分割していたペインそれぞれをWindowに
+ bind b break-pane
+ # ペインの縦分割
+ bind h split-window -v -c "#{pane_current_path}"
+ # ペインの横分割
+ bind v split-window -h -c "#{pane_current_path}"
+ # ペイン移動
+ bind -r C-h select-pane -L
+ bind -r C-j select-pane -D
+ bind -r C-k select-pane -U
+ bind -r C-l select-pane -R
+ # ペインリサイズ関連vi風
+ bind -r H resize-pane -L 2
+ bind -r J resize-pane -D 1
+ bind -r K resize-pane -U 1
+ bind -r L resize-pane -R 2
+ bind s swap-pane -U
+ # ペイン終了 || ウィンドウ終了
+ bind k run "tmux kill-pane || tmux kill-window"
+ # ペイン番号表示
+ bind i display-panes
+ # コピーモード
+ bind y copy-mode
+ # ペーストモード
+bind p paste-buffer
+  # Mouseモード切り替え
