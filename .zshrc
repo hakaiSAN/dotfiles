@@ -4,11 +4,15 @@ case ${OSTYPE} in
   #TODO Status Tracking(Currrently, 20.0 is beta and need to build from source code)
   #verflag=`echo "$(echo ${OSTYPE} | sed -e s/'[^0-9,.]'//g) >= 20.0" | bc`
   #if [ $verflag -eq 1 ]; then
-  if [ `brew list | grep zplug` -e "" ]; then
+  temp=$PATH
+  #Temporary Path
+  PATH=/opt/homebrew/bin:/home/local/bin:$PATH
+  if [ `brew list --formula | grep zplug` -e "" ]; then
     export ZPLUG_HOME=/usr/local/opt/zplug
   else
     export ZPLUG_HOME=~/.zplug
   fi
+  PATH=$temp
   ;;
   linux*)
     export ZPLUG_HOME=~/.zplug
