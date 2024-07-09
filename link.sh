@@ -19,6 +19,8 @@ if [ "$ (uname)" == 'Darwin' ]; then
   ln -sf ~/dotfiles/bin/get_ssid /usr/local/bin/get_ssid
   ln -sf ~/dotfiles/bin/battery /usr/local/bin/battery
   ln -sf ~/dotfiles/bin/ssh-pane /usr/local/bin/ssh-pane
+  ln -sf ~/dotfiles/.yabairc ~/.yabairc
+  ln -sf ~/dotfiles/.skhdrc ~/.skhdrc
 fi
 
 #arch linux用
