@@ -63,4 +63,7 @@ alt - e : yabai -m window --toggle split
 # alt - t : yabai -m window --toggle float && /tmp/yabai-restore/$(yabai -m query --windows --window | jq -re '.id').restore 2>/dev/null || true
 alt - t : yabai -m window --toggle float && yabai -m window --grid 4:4:1:1:2:2
 
-
+# send window to monitor and follow focus
+ctrl + cmd - c  : yabai -m window --display next; yabai -m display --focus next
+ctrl + cmd - x  : yabai -m window --display prev; yabai -m display --focus prev
+ctrl + cmd - 1  : yabai -m window --display 1; yabai -m display --focus 1
