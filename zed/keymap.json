@@ -1,0 +1,35 @@
+// Zed keymap
+//
+// For information on binding keys, see the Zed
+// documentation: https://zed.dev/docs/key-bindings
+//
+// To see the default key bindings run `zed: open default keymap`
+// from the command palette.
+[
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-t h": "pane::SplitHorizontal",
+      "ctrl-t v": "pane::SplitVertical",
+      "ctrl-t ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-t ctrl-j": "workspace::ActivatePaneDown",
+      "ctrl-t ctrl-k": "workspace::ActivatePaneUp",
+      "ctrl-t ctrl-l": "workspace::ActivatePaneRight",
+      "ctrl-t s": "workspace::SwapPaneUp",
+      "ctrl-t n": "workspace::ActivateNextPane",
+      "ctrl-t k": "pane::CloseActiveItem",
+      "ctrl-t p": "project_panel::ToggleFocus",
+      "ctrl-t o": "outline_panel::ToggleFocus",
+      "ctrl-t t": "terminal_panel::ToggleFocus",
+      "ctrl-t mcd-i": "agent::ContinueThread"
+    }
+  },
+  {
+    "context": "Editor && (vim_mode == normal || vim_mode == visual) && !VimWaiting && !menu",
+    "bindings": {
+      "space /": "editor::ToggleComments",
+      ">": "vim::Indent",
+      "cmd-i": "assistant::InlineAssist"
+    }
+  }
+]

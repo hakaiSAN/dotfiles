@@ -1,1 +1,5 @@
 .curlrc
+libevent
+zed/prompts
+zed/conversations
+zed/themes

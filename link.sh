@@ -5,6 +5,7 @@ ln -sf ~/dotfiles/.tmux.conf ~/.tmux.conf
 ln -sf ~/dotfiles/.dein.toml ~/.dein.toml
 ln -sf ~/dotfiles/.dein_lazy.toml ~/.dein_lazy.toml
 ln -sf ~/dotfiles/.zsh_fzf ~/.zsh_fzf
+ln -sf ~/dotfiles/zed ~/.config/zed
 
 #Ubuntu用
 if [ -f /etc/lsb-release ]; then
